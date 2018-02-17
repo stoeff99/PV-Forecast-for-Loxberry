@@ -1,0 +1,439 @@
+<style>
+   .tooltip {
+   position: relative;
+   display: inline-block;
+   border-bottom: 1px dotted black;
+   }
+   .tooltip .tooltiptext {
+   visibility: hidden;
+   width: 350px;
+   background-color: #709e15;
+   color: #fff;
+   text-align: center;
+   border-radius: 3px;
+   padding: 5px 5px;
+   position: absolute;
+   z-index: 1;
+   bottom: 125%;
+   left: 50%;
+   margin-left: -350px;
+   opacity: 1;
+   transition: opacity 0.5s;
+   }
+   .tooltip .tooltiptext::after {
+   content: "";
+   position: absolute;
+   top: 100%;
+   left: 50%;
+   margin-left: -5px;
+   border-width: 5px;
+   border-style: solid;
+   border-color: transparent transparent transparent transparent;
+   }
+   .tooltip:hover .tooltiptext {
+   font-family: Helvetica, Arial, sans-serif, serif;
+   text-shadow: 0px 0px;
+   font-size: 0.8em;
+   visibility: visible;
+   opacity: 1;
+   }
+</style>
+<form method="post" data-ajax="false" name="main_form" id="main_form" action="./index.cgi">
+   <input type="hidden" name="saveformdata" value="1">
+   <div class="form-group">
+      <table width="100%">
+         <tbody>
+            <tr>
+               <td valign="bottom" width="100px">&nbsp;&nbsp;<img src="../../../system/images/icons/pv_forecast/icon_512.png" alt="test" width="100" height="100" />&nbsp;</td>
+               <td align="left" valign="bottom">
+                  <h2>PV-Forecast - Settings<br /><span style="font-size: xx-small;">Powered by <a title="Forecast.Solar" href="http://forecast.solar" target="_blank" rel="noopener">FORECAST.SOLAR</a></span></h2>
+               </td>
+               <td align="right" valign="middle">
+                  <b><a href="http://loxberry/admin/system/tools/logfile.cgi?logfile=plugins/mirobot2lox/mirobot2lox.log&amp;header=txt" target="_blank" rel="noopener">Debug&nbsp;</a>&nbsp;</b>
+               </td>
+               <td valign="middle" width="50">
+                  <fieldset>
+                     <select id="name="debug"" name="debug" data-role="flipswitch"><!--$debug_selected--></select>
+                  </fieldset>
+               </td>
+            </tr>
+            <tr>
+               <td colspan=3>
+                  <div id="form-error-message" class="form-error-message"></div>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <h3>Forecast.Solar</h3>
+      <hr>
+      <table class="formtable" border="1" width="100%" cellpadding="5" cellspacing="0">
+         <tbody>
+            <tr>
+               <td>
+                  <table class="formtable" border="0" width="100%" cellpadding="0">
+                     <tbody>
+                        <tr>
+                           <h4>&nbsp;&nbsp;<u>Anlage 1</u></h4>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Anlage aktiv</td>
+                           <td style="width: 45%;">
+                              <fieldset>
+                                 <select id="system_active_1" name="system_active_1" data-role="flipswitch">
+                                    <!--$system_active_1_selected-->
+                                 </select>
+                                 &nbsp;
+                                 <div class="tooltip">?<span class="tooltiptext">Ein = Anlage wird abgefragt und zum Forecast addiert<br>Aus = wird nicht abgefragt.</span></div>
+                              </fieldset>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Breitangrad (lat)</td>
+                           <td style="width: 45%;"><input id="lat_1" class="textfield" name="lat_1" type="text" value="<!--$lat_1-->" data-validation="number" data-validation-allowing="range[-90;90],float,negative"  data-validation-error-msg="* Anlage 1 - Bitte geben Sie einen gültigen Breitengrad zwischen -90 und +90 Grad an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Breitengrad des Anlagenstandort. Als Dezimaltrennzeichen einen Punkt verwenden.</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Längengrad (lon)</td>
+                           <td style="width: 45%;"><input id="lon_1" class="textfield" name="lon_1" type="text" value="<!--$lon_1-->" data-validation="number" data-validation-allowing="range[-90;90],float,negative"  data-validation-error-msg="* Anlage 1 - Bitte geben Sie einen gültigen Längengrad zwischen -90 und +90 Grad an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Längengrad des Anlagenstandort. Als Dezimaltrennzeichen einen Punkt verwenden.</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Dachneigung (dec)</td>
+                           <td style="width: 45%;"><input id="dec_1" class="textfield" name="dec_1" type="text" value="<!--$dec_1-->" data-validation="number" data-validation-allowing="range[0;90]"  data-validation-error-msg="* Anlage 1 - Bitte geben Sie eine gültige Dachneigung zwischen 0 und +90 Grad an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Die Dachneigung in Grad. 0 = horizontal, 90 = vertikal</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Ausrichtung (az)</td>
+                           <td style="width: 45%;"><input id="az_1" class="textfield" name="az_1" type="text" value="<!--$az_1-->" data-validation="number" data-validation-allowing="range[-90;90],negative"  data-validation-error-msg="* Anlage 1 - Bitte geben Sie eine gültige Ausrichtung zwischen -90 und +90 Grad an. (West = 90, Süd = 0, Ost = -90)" /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Die Ausrichtung der Anlage. West = 90, Süd = 0, Ost = -90</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;kW-Peak (kwp)</td>
+                           <td style="width: 45%;"><input id="kwp_1" class="textfield" name="kwp_1" type="text" value="<!--$kwp_1-->" data-validation="number" data-validation-allowing="range[0;1000],float"  data-validation-error-msg="* Anlage 1 - Bitte geben Sie einen gültigen Werte für die Geasmtleistung zwischen 0 und 1000 kWp an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Gesamtleistung in kw-Peak (0-1000.0). Als Dezimaltrennzeichen einen Punkt verwenden.</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Dämpfung</td>
+                           <td style="width: 45%;"><input id="damp_1" class="textfield" name="damp_1" type="text" value="<!--$damp_1-->" data-validation="number" data-validation-allowing="range[0;3],float"  data-validation-error-msg="* Anlage 1 - Bitte geben Sie eine gültige Dämpfung zwischen 0.00 und 3.00 an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Bei der Dämpfung wird morgens und abends die Prognose gedämpft (0.00-3.00). Siehe Bilder im LoxWiki.<br>Als Dezimaltrennzeichen einen Punkt verwenden.</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Reserve in %</td>
+                           <td style="width: 45%;"><input id="reserve_1" class="textfield" name="reserve_1" type="text" value="<!--$reserve_1-->" data-validation="number" data-validation-allowing="range[0;30]"  data-validation-error-msg="* Anlage 1 - Bitte geben Sie eine gültige Reserve zwischen 0 und 30% an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Hier kann ein Reserve in % angegeben werden (0-30). Somit wird die Prognose immer um diese Faktor verringert.<br>Das verringert zwar den optimalen Eigenverbrauch, allerdings kann so vermieden werden das ggf. Leistung aus dem Netz geholt wird.</span></div>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </td>
+               <td>
+                  <table class="formtable" border="0" width="100%" cellpadding="0">
+                     <tbody>
+                        <tr>
+                           <h4>&nbsp;&nbsp;<u>Anlage 2</u></h4>
+                        </tr>
+                        <tr>
+                           <td style="width: 25%;">&nbsp;Anlage aktiv</td>
+                           <td style="width: 20%;">
+                              <fieldset>
+                                 <select id="system_active_2" name="system_active_2" data-role="flipswitch">
+                                    <!--$system_active_2_selected-->
+                                 </select>
+                                 &nbsp;
+                                 <div class="tooltip">?<span class="tooltiptext">Ein = Anlage wird abgefragt und zum Forecast addiert<br>Aus = wird nicht abgefragt.</span></div>
+                              </fieldset>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Breitangrad (lat)</td>
+                           <td style="width: 45%;"><input id="lat_2" class="textfield" name="lat_2" type="text" value="<!--$lat_2-->" data-validation="number" data-validation-allowing="range[-90;90],float,negative"  data-validation-error-msg="* Anlage 2 - Bitte geben Sie einen gültigen Breitengrad zwischen -90 und +90 Grad an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Breitengrad des Anlagenstandort. Als Dezimaltrennzeichen einen Punkt verwenden.</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Längengrad (lon)</td>
+                           <td style="width: 45%;"><input id="lon_2" class="textfield" name="lon_2" type="text" value="<!--$lon_2-->" data-validation="number" data-validation-allowing="range[-90;90],float,negative"  data-validation-error-msg="* Anlage 2 - Bitte geben Sie einen gültigen Längengrad zwischen -90 und +90 Grad an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Längengrad des Anlagenstandort. Als Dezimaltrennzeichen einen Punkt verwenden.</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Dachneigung (dec)</td>
+                           <td style="width: 45%;"><input id="dec_2" class="textfield" name="dec_2" type="text" value="<!--$dec_2-->" data-validation="number" data-validation-allowing="range[0;90]"  data-validation-error-msg="* Anlage 2 - Bitte geben Sie eine gültige Dachneigung zwischen 0 und +90 Grad an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Die Dachneigung in Grad. 0 = horizontal, 90 = vertikal</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Ausrichtung (az)</td>
+                           <td style="width: 45%;"><input id="az_2" class="textfield" name="az_2" type="text" value="<!--$az_2-->" data-validation="number" data-validation-allowing="range[-90;90],negative"  data-validation-error-msg="* Anlage 2 - Bitte geben Sie eine gültige Ausrichtung zwischen -90 und +90 Grad an. (West = 90, Süd = 0, Ost = -90)" /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Die Ausrichtung der Anlage. West = 90, Süd = 0, Ost = -90</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;kW-Peak (kwp)</td>
+                           <td style="width: 45%;"><input id="kwp_2" class="textfield" name="kwp_2" type="text" value="<!--$kwp_2-->" data-validation="number" data-validation-allowing="range[0;1000],float"  data-validation-error-msg="* Anlage 2 - Bitte geben Sie einen gültigen Werte für die Geasmtleistung zwischen 0 und 1000 kWp an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Gesamtleistung in kw-Peak (1.0-1000.0). Als Dezimaltrennzeichen einen Punkt verwenden.</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Dämpfung</td>
+                           <td style="width: 45%;"><input id="damp_2" class="textfield" name="damp_2" type="text" value="<!--$damp_2-->" data-validation="number" data-validation-allowing="range[0;3],float"  data-validation-error-msg="* Anlage 2 - Bitte geben Sie eine gültige Dämpfung zwischen 0.00 und 3.00 an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Bei der Dämpfung wird morgens und abends die Prognose gedämpft (0.00-3.00). Siehe Bilder im LoxWiki.<br>Als Dezimaltrennzeichen einen Punkt verwenden.</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Reserve in %</td>
+                           <td style="width: 45%;"><input id="reserve_2" class="textfield" name="reserve_2" type="text" value="<!--$reserve_2-->" data-validation="number" data-validation-allowing="range[0;30]"  data-validation-error-msg="* Anlage 2 - Bitte geben Sie eine gültige Reserve zwischen 0 und 30% an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Hier kann ein Reserve in % angegeben werden (0-30). Somit wird die Prognose immer um diese Faktor verringert.<br>Das verringert zwar den optimalen Eigenverbrauch, allerdings kann so vermieden werden das ggf. Leistung aus dem Netz geholt wird.</span></div>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </td>
+               <td>
+                  <table class="formtable" border="0" width="100%" cellpadding="0">
+                     <tbody>
+                        <tr>
+                           <h4>&nbsp;&nbsp;<u>Anlage 3</u></h4>
+                        </tr>
+                        <tr>
+                           <td style="width: 25%;">&nbsp;Anlage aktiv</td>
+                           <td style="width: 20%;">
+                              <fieldset>
+                                 <select id="system_active_3" name="system_active_3" data-role="flipswitch">
+                                    <!--$system_active_3_selected-->
+                                 </select>
+                                 &nbsp;
+                                 <div class="tooltip">?<span class="tooltiptext">Ein = Anlage wird abgefragt und zum Forecast addiert<br>Aus = wird nicht abgefragt.</span></div>
+                              </fieldset>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Breitangrad (lat)</td>
+                           <td style="width: 45%;"><input id="lat_3" class="textfield" name="lat_3" type="text" value="<!--$lat_3-->" data-validation="number" data-validation-allowing="range[-90;90],float,negative"  data-validation-error-msg="* Anlage 3 - Bitte geben Sie einen gültigen Breitengrad zwischen -90 und +90 Grad an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Breitengrad des Anlagenstandort. Als Dezimaltrennzeichen einen Punkt verwenden.</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Längengrad (lon)</td>
+                           <td style="width: 45%;"><input id="lon_3" class="textfield" name="lon_3" type="text" value="<!--$lon_3-->" data-validation="number" data-validation-allowing="range[-90;90],float,negative"  data-validation-error-msg="* Anlage 3 - Bitte geben Sie einen gültigen Längengrad zwischen -90 und +90 Grad an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Längengrad des Anlagenstandort. Als Dezimaltrennzeichen einen Punkt verwenden.</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Dachneigung (dec)</td>
+                           <td style="width: 45%;"><input id="dec_3" class="textfield" name="dec_3" type="text" value="<!--$dec_3-->" data-validation="number" data-validation-allowing="range[0;90]"  data-validation-error-msg="* Anlage 3 - Bitte geben Sie eine gültige Dachneigung zwischen 0 und +90 Grad an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Die Dachneigung in Grad. 0 = horizontal, 90 = vertikal</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Ausrichtung (az)</td>
+                           <td style="width: 45%;"><input id="az_3" class="textfield" name="az_3" type="text" value="<!--$az_3-->" data-validation="number" data-validation-allowing="range[-90;90],negative"  data-validation-error-msg="* Anlage 3 - Bitte geben Sie eine gültige Ausrichtung zwischen -90 und +90 Grad an. (West = 90, Süd = 0, Ost = -90)" /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Die Ausrichtung der Anlage. West = 90, Süd = 0, Ost = -90</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;kW-Peak (kwp)</td>
+                           <td style="width: 45%;"><input id="kwp_3" class="textfield" name="kwp_3" type="text" value="<!--$kwp_3-->" data-validation="number" data-validation-allowing="range[0;1000],float"  data-validation-error-msg="* Anlage 3 - Bitte geben Sie einen gültigen Werte für die Geasmtleistung zwischen 0 und 1000 kWp an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Gesamtleistung in kw-Peak (0-1000.0). Als Dezimaltrennzeichen einen Punkt verwenden.</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Dämpfung</td>
+                           <td style="width: 45%;"><input id="damp_3" class="textfield" name="damp_3" type="text" value="<!--$damp_3-->" data-validation="number" data-validation-allowing="range[0;3],float"  data-validation-error-msg="* Anlage 3 - Bitte geben Sie eine gültige Dämpfung zwischen 0.00 und 3.00 an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Bei der Dämpfung wird morgens und abends die Prognose gedämpft (0.00-3.00). Siehe Bilder im LoxWiki.<br>Als Dezimaltrennzeichen einen Punkt verwenden.</span></div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">&nbsp;Reserve in %</td>
+                           <td style="width: 45%;"><input id="reserve_3" class="textfield" name="reserve_3" type="text" value="<!--$reserve_3-->" data-validation="number" data-validation-allowing="range[0;30]"  data-validation-error-msg="* Anlage 3 - Bitte geben Sie eine gültige Reserve zwischen 0 und 30% an." /></td>
+                           <td style="width: 10px;">
+                              <div class="tooltip">&nbsp;?<span class="tooltiptext">Hier kann ein Reserve in % angegeben werden (0-30). Somit wird die Prognose immer um diese Faktor verringert.<br>Das verringert zwar den optimalen Eigenverbrauch, allerdings kann so vermieden werden das ggf. Leistung aus dem Netz geholt wird.</span></div>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <hr>
+      <p>&nbsp;</p>
+      <h3>MiniServer</h3>
+      <hr>
+      <table class="formtable" border="0" width="100%" cellpadding="5">
+         <tbody>
+            <tr>
+               <td style="width: 15%;">&nbsp;MiniServer</td>
+               <td style="width: 30%;">
+                  <select id="miniserver" name="miniserver" data-mini="true">
+                     <!--$miniserver_select-->
+                  </select>
+               </td>
+               <td style="width: 10px;">
+                  <div class="tooltip">?<span class="tooltiptext">Hier kann der MiniServer ausgewählt werden an den die Daten gesendet werden sollen.</span></div>
+               </td>
+               <td style="width: 10%;">&nbsp;</td>
+               <td style="width: 15%;">&nbsp;UDP-Port</td>
+               <td style="width: 30%;"><input id="udpport" class="textfield" name="udpport" type="text" value="<!--$udpport-->" data-validation="number" data-validation-allowing="range[0;65000]"  data-validation-error-msg="* Bitte geben Sie einen gültigen UDP-Port zwischen 0 und 65000 an." /></td>
+               <td style="width: 10px;">
+                  <div class="tooltip">?<span class="tooltiptext">Dan diesen UDP-Port des MiniServer werden die Daten gesendet. </span></div>
+               </td>
+            </tr>
+            <tr>
+               <td style="width: 15%;">&nbsp;Abfrage-Interval</td>
+               <td style="width: 30%;">
+                  <select id="cron" name="cron" data-mini="true" data-native-menu="false">
+                     <!--$cron_select-->
+                  </select>
+               </td>
+               <td style="width: 10px;">
+                  <div class="tooltip">?<span class="tooltiptext">Die Werte können alle 15, 30 oder 60 Minuten gesendet werden. Die Daten werden von forecast.solar fast in Echtzeit neu berechent, somit fließt eine Veränderung des Wetters direkt mit ein.</span></div>
+               </td>
+               <td style="width: 10%;">&nbsp;</td>
+               <td style="width: 15%;">&nbsp;</td>
+               <td style="width: 30%;">&nbsp;</td>
+            </tr>
+         </tbody>
+      </table>
+      <hr>
+      <p>&nbsp;</p>
+      <h3>Daten senden</h3>
+      <hr>
+      <table class="formtable" border="0" width="100%" cellpadding="10">
+         <tbody>
+            <tr>
+               <td style="width: 25%;">&nbsp;Heute/Morgen Total (Summe)</td>
+               <td style="width: 20%;">
+                  <fieldset>
+                     <select id="today_tomorrow_sum" name="today_tomorrow_sum" data-role="flipswitch">
+                        <!--$today_tomorrow_sum_selected-->
+                     </select>
+                     &nbsp;
+                     <div class="tooltip">?<span class="tooltiptext">Es alle Stundenwerte des Tages summiert und als Total-Wert je für heute und morgen gesendet.</span></div>
+                  </fieldset>
+               </td>
+               <td style="width: 10%;">&nbsp;</td>
+               <td style="width: 25%;">&nbsp;Heute - Vor-/Nachmittag Total (Summe)</td>
+               <td style="width: 20%;">
+                  <fieldset>
+                     <select id="today_morn_after"" name="today_morn_after" data-role="flipswitch">
+                        <!--$today_morn_after_selected-->
+                     </select>
+                     &nbsp;
+                     <div class="tooltip">?<span class="tooltiptext">Es wird eine Summe für den Vormittag (bis 13 Uhr) und für den Nachmittag (ab 13 Uhr) gesendet.</span></div>
+                  </fieldset>
+               </td>
+            </tr>
+            <tr>
+               <td style="width: 25%;">&nbsp;Heute - Stunden (Summe)</td>
+               <td style="width: 20%;">
+                  <fieldset>
+                     <select id="today_hour" name="today_hour" data-role="flipswitch">
+                        <!--$today_hour_selected-->
+                     </select>
+                     &nbsp;
+                     <div class="tooltip">?<span class="tooltiptext">Es werden die Leistungswerte jeder einzelnen Stunde für den heutigen Tag gesendet.</span></div>
+                  </fieldset>
+               </td>
+               <td style="width: 10%;">&nbsp;</td>
+               <td style="width: 25%;">&nbsp;Heute - 3 und 6 Stunden Total (Summe)</td>
+               <td style="width: 20%;">
+                  <fieldset>
+                     <select id="today_3_6" name="today_3_6" data-role="flipswitch">
+                        <!--$today_3_6_selected-->
+                     </select>
+                     &nbsp;
+                     <div class="tooltip">?<span class="tooltiptext">Es werden je ein Wert für die nächsten 3 und 6 Stunden gesendet.<br>Ist die Uhrzeit x:30 wird die nächste Stunde verwendet.</span></div>
+                  </fieldset>
+               </td>
+            </tr>
+            <tr>
+               <td style="width: 25%;">&nbsp;Morgen - Stunden (Summe)</td>
+               <td style="width: 20%;">
+                  <fieldset>
+                     <select id="tomorrow_hour" name="tomorrow_hour" data-role="flipswitch">
+                        <!--$tomorrow_hour_selected-->
+                     </select>
+                     &nbsp;
+                     <div class="tooltip">?<span class="tooltiptext">Es werden die Leistungswerte jeder einzelnen Stunde für den morgigen Tag gesendet."</span></div>
+                  </fieldset>
+               </td>
+               <td style="width: 10%;">&nbsp;</td>
+               <td style="width: 25%;">&nbsp;Werte zusätzlich in KW (Summe)</td>
+               <td style="width: 20%;">
+                  <fieldset>
+                     <select id="name="kw" name="kw" data-role="flipswitch">
+                        <!--$kw_selected-->
+                     </select>
+                     &nbsp;
+                     <div class="tooltip">?<span class="tooltiptext">Alle Werte zusätzlich zu den Watt-Werten auch in KW gesendet.</span></div>
+                  </fieldset>
+               </td>
+            </tr>
+            <tr>
+               <td style="width: 25%;">&nbsp;Heute/Morgen Total (je Anlage)</td>
+               <td style="width: 20%;">
+                  <fieldset>
+                     <select id="today_tomorrow_sep" name="today_tomorrow_sep" data-role="flipswitch">
+                        <!--$today_tomorrow_sep_selected-->
+                     </select>
+                     &nbsp;
+                     <div class="tooltip">?<span class="tooltiptext">Es alle Stundenwerte des Tages summiert je Anlage separat als Total-Wert für heute und morgen gesendet."</span></div>
+                  </fieldset>
+               </td>
+               <td style="width: 10%;"></td>
+               <td style="width: 25%;"></td>
+               <td style="width: 20%;">
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <hr>
+   </div>
+</form>
+<p>
+   &nbsp;
+</p>
+<p>
+<center>
+   <a id="btncancel" data-role="button" data-inline="true" data-mini="true" data-icon="delete" href="/admin/index.cgi">Abbrechen</a>
+   <button type="submit" form="main_form" id="btnsubmit" data-role="button" data-inline="true" data-mini="true" data-icon="check">Speichern</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <a id="btncancel" data-role="button" data-inline="true" data-mini="true" data-icon="check" href="./index.cgi?do=test_udp">UDP-Test</a>  
+   <div class="tooltip">?<span class="tooltiptext">Nachdem alle Werte im eingegeben und gespeichert sind, kannst du die Daten an den MiniServer senden lassen.</span></div>
+</center>
+</p>
+<div>
+<script>
+   var $messages = $('#form-error-message');
+   $.validate({
+     modules : 'security',
+     scrollToTopOnError : true,
+     errorMessagePosition : $messages,
+   });
+</script>
