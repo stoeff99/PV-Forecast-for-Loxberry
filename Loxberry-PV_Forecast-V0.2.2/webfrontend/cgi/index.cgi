@@ -170,7 +170,7 @@ $today_tomorrow_sep = $pcfg->param("DATA.TODAY_TOMORROW_SEP");
 $today_morn_after = $pcfg->param("DATA.TODAY_MORN_AFTER");
 $kw = $pcfg->param("DATA.KW");
 $debug = $pcfg->param("DEBUG.DEBUG");
-$api_key = $pcfg->param("API_KEY");
+$api_key = $pcfg->param("API_KEY.API_KEY");
 
 #########################################################################
 # Parameter
@@ -471,7 +471,7 @@ sub save {
 	$pcfg->param( "DATA.TODAY_TOMORROW_SEP", "$today_tomorrow_sep" );
 	$pcfg->param( "DATA.KW", "$kw" );
 	$pcfg->param( "DEBUG.DEBUG", "$debug" );
-  $pcfg->param( "API_KEY", "$api_key");
+  $pcfg->param( "API_KEY.API_KEY", "$api_key");
 
     $pcfg->save();
 

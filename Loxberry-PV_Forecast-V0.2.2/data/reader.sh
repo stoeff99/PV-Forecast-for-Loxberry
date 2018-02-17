@@ -125,6 +125,7 @@ ini_parser $configfile_pv "TODAY_HOUR"
 ini_parser $configfile_pv "DATA"
 ini_parser $configfile_pv "TODAY_TOMORROW_SEP"
 ini_parser $configfile_pv "API_KEY"
+ini_parser $configfile_pv "API_KEY"
 
 ini_parser $configfile_general "BASE"
 ini_parser $configfile_general "$MINISERVERMINISERVER"
@@ -149,6 +150,12 @@ if [ $MINUTE -gt 30 ]; then
 HOUR=$(echo "scale=0; $HOUR + 1" | bc)
 fi
 
+#CHECK IF API KEY IS AVAILABLE AND AMEND URL ACCORDINGLY
+if [ -z $API_KEYAPI_KEY ]; then
+	api=""
+else
+	api="/$API_KEYAPI_KEY"
+fi
 
 #GET VALUES FROM FORECAST.SOLAR
 i=1
@@ -157,15 +164,15 @@ do
 data=""
 source "/opt/loxberry/data/plugins/pv_forecast/strings1.txt"
 if [ $FORECAST_1SYSTEM_ACTIVE == 1 ] && [ $i = 1 ]; then
-url=$(echo "https://api.forecast.solar/$API_KEY/estimate/watts/$FORECAST_1LAT/$FORECAST_1LON/$FORECAST_1DEC/$FORECAST_1AZ/$FORECAST_1KWP.csv?damping=$FORECAST_1DAMP")
+url=$(echo "https://api.forecast.solar$api/estimate/watts/$FORECAST_1LAT/$FORECAST_1LON/$FORECAST_1DEC/$FORECAST_1AZ/$FORECAST_1KWP.csv?damping=$FORECAST_1DAMP")
 get_data
 fi
 if [ $FORECAST_2SYSTEM_ACTIVE == 1 ] && [ $i = 2 ] ; then
-url=$(echo "https://api.forecast.solar/$API_KEY/estimate/watts/$FORECAST_2LAT/$FORECAST_2LON/$FORECAST_2DEC/$FORECAST_2AZ/$FORECAST_2KWP.csv?damping=$FORECAST_2DAMP")
+url=$(echo "https://api.forecast.solar$api/estimate/watts/$FORECAST_2LAT/$FORECAST_2LON/$FORECAST_2DEC/$FORECAST_2AZ/$FORECAST_2KWP.csv?damping=$FORECAST_2DAMP")
 get_data
 fi
 if [ $FORECAST_3SYSTEM_ACTIVE == 1 ] && [ $i = 3 ] ; then
-url=$(echo "https://api.forecast.solar/$API_KEY/estimate/watts/$FORECAST_3LAT/$FORECAST_3LON/$FORECAST_3DEC/$FORECAST_3AZ/$FORECAST_3KWP.csv?damping=$FORECAST_3DAMP")
+url=$(echo "https://api.forecast.solar$api/estimate/watts/$FORECAST_3LAT/$FORECAST_3LON/$FORECAST_3DEC/$FORECAST_3AZ/$FORECAST_3KWP.csv?damping=$FORECAST_3DAMP")
 get_data
 fi
 

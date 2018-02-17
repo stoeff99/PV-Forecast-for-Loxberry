@@ -290,7 +290,7 @@
          <tbody>
             <tr>
               <td style="width: 25%;">&nbsp;API Key</td>
-              <td style="width: 45%;"><input id="api_key" class="textfield" name="api_key" type="text" value="<!--$api_key-->" /></td>
+              <td style="width: 45%;"><input id="api_key" class="textfield" name="api_key" type="text" value="<!--$api_key-->" data-validation="string" data-validation-allowing="range[a-zA-Z0-9-]+"  data-validation-error-msg="* Bitte geben Sie einen gültigen API Key an."/></td>
               <td style="width: 10px;">
                 <div class="tooltip">&nbsp;?<span class="tooltiptext">Hier kann der persönliche API Key von forecast.solar eingetragen werden. Wenn du keinen API Key hast, dann Feld leer lassen.</span></div>
             </td>

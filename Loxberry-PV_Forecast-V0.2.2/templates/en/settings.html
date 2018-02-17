@@ -284,6 +284,21 @@
       </table>
       <hr>
       <p>&nbsp;</p>
+      <h3>API Key</h3>
+      <hr>
+      <table class="formtable" border="0" width="30%" cellpadding="5">
+         <tbody>
+            <tr>
+              <td style="width: 25%;">&nbsp;API Key</td>
+              <td style="width: 45%;"><input id="api_key" class="textfield" name="api_key" type="text" value="<!--$api_key-->" data-validation="string" data-validation-allowing="range[a-zA-Z0-9-]+"  data-validation-error-msg="* Bitte geben Sie einen gültigen API Key an."/></td>
+              <td style="width: 10px;">
+                <div class="tooltip">&nbsp;?<span class="tooltiptext">Hier kann der persönliche API Key von forecast.solar eingetragen werden. Wenn du keinen API Key hast, dann Feld leer lassen.</span></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <p>&nbsp;</p>
       <h3>MiniServer</h3>
       <hr>
       <table class="formtable" border="0" width="100%" cellpadding="5">
@@ -424,7 +439,7 @@
 <center>
    <a id="btncancel" data-role="button" data-inline="true" data-mini="true" data-icon="delete" href="/admin/index.cgi">Abbrechen</a>
    <button type="submit" form="main_form" id="btnsubmit" data-role="button" data-inline="true" data-mini="true" data-icon="check">Speichern</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   <a id="btncancel" data-role="button" data-inline="true" data-mini="true" data-icon="check" href="./index.cgi?do=test_udp">UDP-Test</a>  
+   <a id="btncancel" data-role="button" data-inline="true" data-mini="true" data-icon="check" href="./index.cgi?do=test_udp">UDP-Test</a>
    <div class="tooltip">?<span class="tooltiptext">Nachdem alle Werte im eingegeben und gespeichert sind, kannst du die Daten an den MiniServer senden lassen.</span></div>
 </center>
 </p>
