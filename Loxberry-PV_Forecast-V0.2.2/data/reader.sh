@@ -256,6 +256,7 @@ if [ $hour == "21" ]; then tomorrow21=$value; fi
 if [ $hour == "22" ]; then tomorrow22=$value; fi
 if [ $hour == "23" ]; then tomorrow23=$value; fi
 if [ $hour == "00" ]; then tomorrow0=$value; fi
+
 #TOTAL TOMORROW
 total_value_tomorrow=$(echo "scale=0; $total_value_tomorrow + $value" | bc)
 fi
@@ -890,7 +891,7 @@ echo "$D - Total Today 1/2/3 " $total_value_today_1"/"$total_value_today_2"/"$to
 echo "$D - Total Today 1/2/3 " $total_value_tomorrow_1"/"$total_value_tomorrow_2"/"$total_value_tomorrow_3 >> $log
 echo "$D - Total Today: "$total_value_today_sum >> $log
 echo "$D - Total Tomorrow: "$total_value_tomorrow_sum >> $log
-echo "$D - Total Mornig: "$total_value_morning_sum >> $log
+echo "$D - Total Morning: "$total_value_morning_sum >> $log
 echo "$D - Total Afternoon: "$total_value_afternoon_sum >> $log
 echo "$D - Next 3 / 6: "$next3_sum" / "$next6_sum >> $log
 echo "$D - Today h: "$today0_sum"/"$today1_sum"/"$today2_sum"/"$today3_sum"/"$today4_sum"/"$today5_sum"/"$today6_sum"/"$today7_sum"/"$today8_sum"/"$today9_sum"/"$today10_sum"/"$today11_sum"/"$today12_sum"/"$today13_sum"/"$today14_sum"/"$today15_sum"/"$today16_sum"/"$today17_sum"/"$today18_sum"/"$today19_sum"/"$today20_sum"/"$today21_sum"/"$today22_sum"/"$today23_sum >> $log
