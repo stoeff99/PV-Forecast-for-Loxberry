@@ -1,0 +1,12 @@
+#!/bin/sh
+SCRIPTNAME="pv_forecast"
+SCRIPTPATH="/opt/loxberry/data/plugins/$SCRIPTNAME"
+log="/opt/loxberry/log/plugins/$SCRIPTNAME/$SCRIPTNAME.log"
+
+if  ! [ -x "$SCRIPTPATH/reader.sh" ]; then
+chmod 0755 $SCRIPTPATH/reader.sh
+chmod 0644 $SCRIPTPATH/strings.txt
+chmod 0644 $SCRIPTPATH/strings1.txt
+fi
+
+exit 0 
