@@ -256,7 +256,6 @@ if [ $hour == "21" ]; then tomorrow21=$value; fi
 if [ $hour == "22" ]; then tomorrow22=$value; fi
 if [ $hour == "23" ]; then tomorrow23=$value; fi
 if [ $hour == "00" ]; then tomorrow0=$value; fi
-
 #TOTAL TOMORROW
 total_value_tomorrow=$(echo "scale=0; $total_value_tomorrow + $value" | bc)
 fi
