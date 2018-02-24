@@ -269,15 +269,15 @@ today23=$(echo "scale=1; ($today23_1_int + $today23_2_int)/2" | bc)
 today0=$(echo "scale=1; ($today0_1_int + $today0_2_int)/2" | bc)
 
 #TOTAL MORING
-if [ $hour -ge 1 ] && [ $hour -le 12 ]; then
+if ( $(echo "$hour > "1:00"" | bc) ) && ( $(echo "$hour > "12:00"" | bc) ); then
 total_value_morning=$(echo "scale=0; ($total_value_morning + $value)/2" | bc)
 fi
 #TOTAL AFTERNOON
-if [ $hour -ge 13 ] && [ $hour -le 23 ]; then
+if ( $(echo "$hour > "12:30"" | bc) ) && ( $(echo "$hour > "00:30"" | bc) ); then
 total_value_afternoon=$(echo "scale=0; ($total_value_afternoon + $value)/2" | bc)
 fi
 #TOTAL TODAY
-total_value_today=$(echo "scale=0; ($total_value_today + $value + $today0)/2" | bc)
+total_value_today=$(echo "scale=0; ($total_value_today + $value)/2" | bc)
 fi
 
 if [ $today == 0 ];then
@@ -356,7 +356,7 @@ tomorrow23=$(echo "scale=0; ($tomorrow23_1_int + $tomorrow23_2_int)/2" | bc)
 tomorrow0=$(echo "scale=0; ($tomorrow0_1_int + $tomorrow0_2_int)/2" | bc)
 
 #TOTAL TOMORROW
-total_value_tomorrow=$(echo "scale=0; ($total_value_tomorrow + $value9/2" | bc)
+total_value_tomorrow=$(echo "scale=0; ($total_value_tomorrow + $value)/2" | bc)
 fi
 
 fi
