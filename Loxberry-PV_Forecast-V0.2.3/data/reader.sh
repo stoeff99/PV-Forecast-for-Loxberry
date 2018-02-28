@@ -365,15 +365,13 @@ if [ -z "$today0" ]; then
 fi
 
 #TOTAL MORING
-if ( $(echo "$hour > "1:00"" | bc) ) && ( $(echo "$hour > "12:00"" | bc) ); then
-total_value_morning=$(echo "scale=0; ($total_value_morning + $value)/2" | bc)
-fi
+total_value_morning=$(echo "scale=0; $today1 + $today2 + $today3 + $today4 + $today5 + $today6 + $today7 + $today8 + $today9 + $today10 + $today11 + $today12" | bc)
+
 #TOTAL AFTERNOON
-if ( $(echo "$hour > "12:30"" | bc) ) && ( $(echo "$hour > "00:30"" | bc) ); then
-total_value_afternoon=$(echo "scale=0; ($total_value_afternoon + $value)/2" | bc)
-fi
+total_value_afternoon=$(echo "scale=0; $today13 + $today14 + $today15 + $today16 + $today17 + $today18 + $today19 + $today20 + $today21 + $today22 + $today23 + $today0" | bc)
+
 #TOTAL TODAY
-total_value_today=$(echo "scale=0; ($total_value_today + $value)/2" | bc)
+total_value_today=$(echo "scale=0; $total_value_morning + $total_value_afternoon" | bc)
 fi
 
 if [ $today == 0 ];then
@@ -451,8 +449,107 @@ tomorrow22=$(echo "scale=0; ($tomorrow22_1_int + $tomorrow22_2_int)/2" | bc)
 tomorrow23=$(echo "scale=0; ($tomorrow23_1_int + $tomorrow23_2_int)/2" | bc)
 tomorrow0=$(echo "scale=0; ($tomorrow0_1_int + $tomorrow0_2_int)/2" | bc)
 
+if [ -z "$tomorrow1" ]; then
+    tomorrow1="0"
+fi
+
+if [ -z "$tomorrow2" ]; then
+    tomorrow2="0"
+fi
+
+if [ -z "$tomorrow3" ]; then
+    tomorrow3="0"
+fi
+
+if [ -z "$tomorrow4" ]; then
+    tomorrow4="0"
+fi
+
+if [ -z "$tomorrow5" ]; then
+    tomorrow5="0"
+fi
+
+if [ -z "$tomorrow6" ]; then
+    tomorrow6="0"
+fi
+
+if [ -z "$tomorrow7" ]; then
+    tomorrow7="0"
+fi
+
+if [ -z "$tomorrow8" ]; then
+    tomorrow8="0"
+fi
+
+if [ -z "$tomorrow9" ]; then
+    tomorrow9="0"
+fi
+
+if [ -z "$tomorrow10" ]; then
+    tomorrow10="0"
+fi
+
+if [ -z "$tomorrow11" ]; then
+    tomorrow11="0"
+fi
+
+if [ -z "$tomorrow12" ]; then
+    tomorrow12="0"
+fi
+
+if [ -z "$tomorrow13" ]; then
+    tomorrow13="0"
+fi
+
+if [ -z "$tomorrow14" ]; then
+    tomorrow14="0"
+fi
+
+if [ -z "$tomorrow15" ]; then
+    tomorrow15="0"
+fi
+
+if [ -z "$tomorrow16" ]; then
+    tomorrow16="0"
+fi
+
+if [ -z "$tomorrow17" ]; then
+    tomorrow17="0"
+fi
+
+if [ -z "$tomorrow18" ]; then
+    tomorrow18="0"
+fi
+
+if [ -z "$tomorrow19" ]; then
+    tomorrow19="0"
+fi
+
+if [ -z "$tomorrow20" ]; then
+    tomorrow20="0"
+fi
+
+if [ -z "$tomorrow21" ]; then
+    tomorrow21="0"
+fi
+
+if [ -z "$tomorrow22" ]; then
+    tomorrow22="0"
+fi
+
+if [ -z "$tomorrow23" ]; then
+    tomorrow23="0"
+fi
+
+if [ -z "$tomorrow0" ]; then
+    tomorrow0="0"
+fi
+
+
+
 #TOTAL TOMORROW
-total_value_tomorrow=$(echo "scale=0; ($total_value_tomorrow + $value)/2" | bc)
+total_value_tomorrow=$(echo "scale=0; $tomorrow1 + $tomorrow2 + $tomorrow3 + $tomorrow4 + $tomorrow5 + $tomorrow6 + $tomorrow7 + $tomorrow8 + $tomorrow9 + $tomorrow10 + $tomorrow11 + $tomorrow12 + $tomorrow13 + $tomorrow14 + $tomorrow15 + $tomorrow16 + $tomorrow17 + $tomorrow18 + $tomorrow19 + $tomorrow20 + $tomorrow21 + $tomorrow22 + $tomorrow23 + $tomorrow0
+" | bc)
 fi
 
 fi
@@ -1070,10 +1167,10 @@ if [ $HOUR == "17" ]; then next6_sum=$(echo "scale=0; $today17_1 + $today18_1 + 
 if [ $HOUR == "18" ]; then next6_sum=$(echo "scale=0; $today18_1 + $today19_1 + $today20_1 + $today21_1 + $today22_1 + $today23_1 + $today18_2 + $today19_2 + $today20_2 + $today21_2 + $today22_2 + $today23_2 + $today18_3 + $today19_3 + $today20_3 + $today21_3 + $today22_3 + $today23_3" | bc); fi
 if [ $HOUR == "19" ]; then next6_sum=$(echo "scale=0; $today19_1 + $today20_1 + $today21_1 + $today22_1 + $today23_1 + $today0_1 + $today19_2 + $today20_2 + $today21_2 + $today22_2 + $today23_2 + $today0_2 + $today19_3 + $today20_3 + $today21_3 + $today22_3 + $today23_3 + $today0_3" | bc); fi
 if [ $HOUR == "20" ]; then next6_sum=$(echo "scale=0; $today20_1 + $today21_1 + $today22_1 + $today23_1 + $today0_1 + $tomorrow1_1 + $today20_2 + $today21_2 + $today22_2 + $today23_2 + $today0_2 + $tomorrow1_2 + $today20_3 + $today21_3 + $today22_3 + $today23_3 + $today0_3 + $tomorrow1_3" | bc); fi
-if [ $HOUR == "21" ]; then next6_sum=$(echo "scale=0; $today21_1 + $today22_1 + $today23_1 + $today0_1 + $tomorrow1_1 + tomorrow2_1 + $today21_2 + $today22_2 + $today23_2 + $today0_2 + $tomorrow1_2 + tomorrow2_2 + $today21_3 + $today22_3 + $today23_3 + $today0_3 + $tomorrow1_3 + tomorrow2_3" | bc); fi
-if [ $HOUR == "22" ]; then next6_sum=$(echo "scale=0; $today22_1 + $today23_1 + $today0_1 + $tomorrow1_1 + tomorrow2_1 + $tomorrow3_1 + $today22_2 + $today23_2 + $today0_2 + $tomorrow1_2 + tomorrow2_2 + $tomorrow3_2 + $today22_3 + $today23_3 + $today0_3 + $tomorrow1_3 + tomorrow2_3 + $tomorrow3_3" | bc); fi
-if [ $HOUR == "23" ]; then next6_sum=$(echo "scale=0; $today23_1 + $today0_1 + $tomorrow1_1 + $tomorrow2_1 + tomorrow3_1 + $tomorrow4_1 + $today23_2 + $today0_2 + $tomorrow1_2 + $tomorrow2_2 + tomorrow3_2 + $tomorrow4_2 + $today23_3 + $today0_3 + $tomorrow1_3 + $tomorrow2_3 + tomorrow3_3 + $tomorrow4_3" | bc); fi
-if [ $HOUR == "0" ]; then next6_sum=$(echo "scale=0; $today0_1 + $tomorrow1_1 + tomorrow2_1 + $tomorrow3_1 + tomorrow4_1 + $tomorrow5_1 + $today0_2 + $tomorrow1_2 + tomorrow2_2 + $tomorrow3_2 + tomorrow4_2 + $tomorrow5_2 + $today0_3 + $tomorrow1_3 + tomorrow2_3 + $tomorrow3_3 + tomorrow4_3 + $tomorrow5_3" | bc); fi
+if [ $HOUR == "21" ]; then next6_sum=$(echo "scale=0; $today21_1 + $today22_1 + $today23_1 + $today0_1 + $tomorrow1_1 + $tomorrow2_1 + $today21_2 + $today22_2 + $today23_2 + $today0_2 + $tomorrow1_2 + $tomorrow2_2 + $today21_3 + $today22_3 + $today23_3 + $today0_3 + $tomorrow1_3 + $tomorrow2_3" | bc); fi
+if [ $HOUR == "22" ]; then next6_sum=$(echo "scale=0; $today22_1 + $today23_1 + $today0_1 + $tomorrow1_1 + $tomorrow2_1 + $tomorrow3_1 + $today22_2 + $today23_2 + $today0_2 + $tomorrow1_2 + $tomorrow2_2 + $tomorrow3_2 + $today22_3 + $today23_3 + $today0_3 + $tomorrow1_3 + $tomorrow2_3 + $tomorrow3_3" | bc); fi
+if [ $HOUR == "23" ]; then next6_sum=$(echo "scale=0; $today23_1 + $today0_1 + $tomorrow1_1 + $tomorrow2_1 + $tomorrow3_1 + $tomorrow4_1 + $today23_2 + $today0_2 + $tomorrow1_2 + $tomorrow2_2 + $tomorrow3_2 + $tomorrow4_2 + $today23_3 + $today0_3 + $tomorrow1_3 + $tomorrow2_3 + $tomorrow3_3 + $tomorrow4_3" | bc); fi
+if [ $HOUR == "0" ]; then next6_sum=$(echo "scale=0; $today0_1 + $tomorrow1_1 + $tomorrow2_1 + $tomorrow3_1 + $tomorrow4_1 + $tomorrow5_1 + $today0_2 + $tomorrow1_2 + $tomorrow2_2 + $tomorrow3_2 + $tomorrow4_2 + $tomorrow5_2 + $today0_3 + $tomorrow1_3 + $tomorrow2_3 + $tomorrow3_3 + $tomorrow4_3 + $tomorrow5_3" | bc); fi
 
 kw_next3_sum=$(echo "scale=3; $next3_sum / 1000" | bc);
 kw_next6_sum=$(echo "scale=3; $next6_sum / 1000" | bc);
