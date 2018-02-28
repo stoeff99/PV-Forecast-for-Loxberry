@@ -243,30 +243,126 @@ if [ $hour == "23:30" ]; then today23_2_int=$value; fi
 if [ $hour == "00:00" ]; then today0_1_int=$value; fi
 if [ $hour == "00:30" ]; then today0_2_int=$value; fi
 
-today1=$(echo "scale=1; ($today1_1_int + $today1_2_int)/2" | bc)
-today2=$(echo "scale=1; ($today2_1_int + $today2_2_int)/2" | bc)
-today3=$(echo "scale=1; ($today3_1_int + $today3_2_int)/2" | bc)
-today4=$(echo "scale=1; ($today4_1_int + $today4_2_int)/2" | bc)
-today5=$(echo "scale=1; ($today5_1_int + $today5_2_int)/2" | bc)
-today6=$(echo "scale=1; ($today6_1_int + $today6_2_int)/2" | bc)
-today7=$(echo "scale=1; ($today7_1_int + $today7_2_int)/2" | bc)
-today8=$(echo "scale=1; ($today8_1_int + $today8_2_int)/2" | bc)
-today9=$(echo "scale=1; ($today9_1_int + $today9_2_int)/2" | bc)
-today10=$(echo "scale=1; ($today10_1_int + $today10_2_int)/2" | bc)
-today11=$(echo "scale=1; ($today11_1_int + $today11_2_int)/2" | bc)
-today12=$(echo "scale=1; ($today12_1_int + $today12_2_int)/2" | bc)
-today13=$(echo "scale=1; ($today13_1_int + $today13_2_int)/2" | bc)
-today14=$(echo "scale=1; ($today14_1_int + $today14_2_int)/2" | bc)
-today15=$(echo "scale=1; ($today15_1_int + $today15_2_int)/2" | bc)
-today16=$(echo "scale=1; ($today16_1_int + $today16_2_int)/2" | bc)
-today17=$(echo "scale=1; ($today17_1_int + $today17_2_int)/2" | bc)
-today18=$(echo "scale=1; ($today18_1_int + $today18_2_int)/2" | bc)
-today19=$(echo "scale=1; ($today19_1_int + $today19_2_int)/2" | bc)
-today20=$(echo "scale=1; ($today20_1_int + $today20_2_int)/2" | bc)
-today21=$(echo "scale=1; ($today21_1_int + $today21_2_int)/2" | bc)
-today22=$(echo "scale=1; ($today22_1_int + $today22_2_int)/2" | bc)
-today23=$(echo "scale=1; ($today23_1_int + $today23_2_int)/2" | bc)
-today0=$(echo "scale=1; ($today0_1_int + $today0_2_int)/2" | bc)
+today1=$(echo "scale=0; ($today1_1_int + $today1_2_int)/2" | bc)
+today2=$(echo "scale=0; ($today2_1_int + $today2_2_int)/2" | bc)
+today3=$(echo "scale=0; ($today3_1_int + $today3_2_int)/2" | bc)
+today4=$(echo "scale=0; ($today4_1_int + $today4_2_int)/2" | bc)
+today5=$(echo "scale=0; ($today5_1_int + $today5_2_int)/2" | bc)
+today6=$(echo "scale=0; ($today6_1_int + $today6_2_int)/2" | bc)
+today7=$(echo "scale=0; ($today7_1_int + $today7_2_int)/2" | bc)
+today8=$(echo "scale=0; ($today8_1_int + $today8_2_int)/2" | bc)
+today9=$(echo "scale=0; ($today9_1_int + $today9_2_int)/2" | bc)
+today10=$(echo "scale=0; ($today10_1_int + $today10_2_int)/2" | bc)
+today11=$(echo "scale=0; ($today11_1_int + $today11_2_int)/2" | bc)
+today12=$(echo "scale=0; ($today12_1_int + $today12_2_int)/2" | bc)
+today13=$(echo "scale=0; ($today13_1_int + $today13_2_int)/2" | bc)
+today14=$(echo "scale=0; ($today14_1_int + $today14_2_int)/2" | bc)
+today15=$(echo "scale=0; ($today15_1_int + $today15_2_int)/2" | bc)
+today16=$(echo "scale=0; ($today16_1_int + $today16_2_int)/2" | bc)
+today17=$(echo "scale=0; ($today17_1_int + $today17_2_int)/2" | bc)
+today18=$(echo "scale=0; ($today18_1_int + $today18_2_int)/2" | bc)
+today19=$(echo "scale=0; ($today19_1_int + $today19_2_int)/2" | bc)
+today20=$(echo "scale=0; ($today20_1_int + $today20_2_int)/2" | bc)
+today21=$(echo "scale=0; ($today21_1_int + $today21_2_int)/2" | bc)
+today22=$(echo "scale=0; ($today22_1_int + $today22_2_int)/2" | bc)
+today23=$(echo "scale=0; ($today23_1_int + $today23_2_int)/2" | bc)
+today0=$(echo "scale=0; ($today0_1_int + $today0_2_int)/2" | bc)
+
+if [ -z "$today1" ]; then
+    today1="0"
+fi
+
+if [ -z "$today2" ]; then
+    today2="0"
+fi
+
+if [ -z "$today3" ]; then
+    today3="0"
+fi
+
+if [ -z "$today4" ]; then
+    today4="0"
+fi
+
+if [ -z "$today5" ]; then
+    today5="0"
+fi
+
+if [ -z "$today6" ]; then
+    today6="0"
+fi
+
+if [ -z "$today7" ]; then
+    today7="0"
+fi
+
+if [ -z "$today8" ]; then
+    today8="0"
+fi
+
+if [ -z "$today9" ]; then
+    today9="0"
+fi
+
+if [ -z "$today10" ]; then
+    today10="0"
+fi
+
+if [ -z "$today11" ]; then
+    today11="0"
+fi
+
+if [ -z "$today12" ]; then
+    today12="0"
+fi
+
+if [ -z "$today13" ]; then
+    today13="0"
+fi
+
+if [ -z "$today14" ]; then
+    today14="0"
+fi
+
+if [ -z "$today15" ]; then
+    today15="0"
+fi
+
+if [ -z "$today16" ]; then
+    today16="0"
+fi
+
+if [ -z "$today17" ]; then
+    today17="0"
+fi
+
+if [ -z "$today18" ]; then
+    today18="0"
+fi
+
+if [ -z "$today19" ]; then
+    today19="0"
+fi
+
+if [ -z "$today20" ]; then
+    today20="0"
+fi
+
+if [ -z "$today21" ]; then
+    today21="0"
+fi
+
+if [ -z "$today22" ]; then
+    today22="0"
+fi
+
+if [ -z "$today23" ]; then
+    today23="0"
+fi
+
+if [ -z "$today0" ]; then
+    today0="0"
+fi
 
 #TOTAL MORING
 if ( $(echo "$hour > "1:00"" | bc) ) && ( $(echo "$hour > "12:00"" | bc) ); then
