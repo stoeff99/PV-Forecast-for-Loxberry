@@ -371,6 +371,8 @@ if [ -z "$today0" ]; then
     today0="0"
 fi
 
+fi
+
 #TOTAL MORING
 total_value_morning=$(echo "scale=0; $today1 + $today2 + $today3 + $today4 + $today5 + $today6 + $today7 + $today8 + $today9 + $today10 + $today11 + $today12" | bc)
 
@@ -379,7 +381,6 @@ total_value_afternoon=$(echo "scale=0; $today13 + $today14 + $today15 + $today16
 
 #TOTAL TODAY
 total_value_today=$(echo "scale=0; $total_value_morning + $total_value_afternoon" | bc)
-fi
 
 
 if [ $tomorrow == 1 ];then
@@ -554,11 +555,11 @@ if [ -z "$tomorrow0" ]; then
     tomorrow0="0"
 fi
 
+fi
 
 #TOTAL TOMORROW
 total_value_tomorrow=$(echo "scale=0; $tomorrow1 + $tomorrow2 + $tomorrow3 + $tomorrow4 + $tomorrow5 + $tomorrow6 + $tomorrow7 + $tomorrow8 + $tomorrow9 + $tomorrow10 + $tomorrow11 + $tomorrow12 + $tomorrow13 + $tomorrow14 + $tomorrow15 + $tomorrow16 + $tomorrow17 + $tomorrow18 + $tomorrow19 + $tomorrow20 + $tomorrow21 + $tomorrow22 + $tomorrow23 + $tomorrow0" | bc)
 
-fi
 fi
 done
 done <<< "$data"
@@ -1186,7 +1187,7 @@ D=`date "+%b %d %H:%M:%S"`
 if [ $DEBUGDEBUG == 1 ]; then
 echo "$D - Rquest OK 1/2/3 "$req_ok_1"/"$req_ok_2"/"$req_ok_3
 echo "$D - Total Today 1/2/3 " $total_value_today_1"/"$total_value_today_2"/"$total_value_today_3 >> $log
-echo "$D - Total Today 1/2/3 " $total_value_tomorrow_1"/"$total_value_tomorrow_2"/"$total_value_tomorrow_3 >> $log
+echo "$D - Total Tomorrow 1/2/3 " $total_value_tomorrow_1"/"$total_value_tomorrow_2"/"$total_value_tomorrow_3 >> $log
 echo "$D - Total Today: "$total_value_today_sum >> $log
 echo "$D - Total Tomorrow: "$total_value_tomorrow_sum >> $log
 echo "$D - Total Morning: "$total_value_morning_sum >> $log
