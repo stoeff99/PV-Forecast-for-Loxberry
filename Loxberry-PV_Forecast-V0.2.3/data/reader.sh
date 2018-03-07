@@ -144,7 +144,7 @@ fi
 
 #Prepare Date
 DATE=`date '+%Y-%m-%d'`
-TOMORROW=`date -v '+1d' '+%Y-%m-%d'`
+DATE_TMRW=`date --date='1 day' '+%Y-%m-%d'`
 HOUR=`date '+%k'`
 MINUTE=`date '+%M'`
 if [ $MINUTE -gt 30 ]; then
@@ -193,7 +193,7 @@ else
 today=0
 fi
 
-if [ "$TOMORROW" == "$day" ]; then
+if [ "$DATE_TMRW" == "$day" ]; then
 tomorrow=1
 else
 tomorrow=0
@@ -1127,6 +1127,7 @@ kw_tomorrow23_sum=$(echo "scale=3; $kw_tomorrow23_1 + $kw_tomorrow23_2 + $kw_tom
 
 ((i++))
 done
+
 
 #Next3
 if [ $HOUR == "1:00" ]; then next3_sum=$(echo "scale=0; $today1_1 + $today2_1 + $today3_1 + $today1_2 + $today2_2 + $today3_2 + $today1_3 + $today2_3 + $today3_3" | bc); fi
