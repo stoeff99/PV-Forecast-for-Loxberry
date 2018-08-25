@@ -1,0 +1,104 @@
+#!/bin/bash
+
+server_url="http://<IP oder webadresse des Volkszaehlers>/VZ/htdocs"
+CANDUMPER="/opt/can-utils/candump can0"
+
+CAN_REPLAY[1]="can0.*500.*  92 00 16"
+HUMAN_INFO[1]="Ruecklauftemperatur WP IWS.EVE"
+VZ_UUIDFOR[1]="0256fbb0-6278-11e3-9158-affc004e939c"
+MP_VALUEIS[1]=""
+CAN_REPLAY[2]="can0.*180.*  A0 79 FA 01 D7"
+HUMAN_INFO[2]="Ruecklauf Soll WPM2"
+VZ_UUIDFOR[2]="1a45bac0-6278-11e3-b821-53e4b032348e"
+MP_VALUEIS[2]=""
+CAN_REPLAY[3]="can0.*500.*  92 00 FA 07 A8"
+HUMAN_INFO[3]="Verdichter"
+VZ_UUIDFOR[3]="5ccd5640-6278-11e3-881a-1d442fedbbaf"
+MP_VALUEIS[3]=""
+CAN_REPLAY[4]="can0.*180.*  A0 79 0C"
+HUMAN_INFO[4]="Aussentemperatur Hauswand (WPM)"
+VZ_UUIDFOR[4]="b0a45b20-31ab-11e3-9569-2f94e7604d59"
+MP_VALUEIS[4]=""
+CAN_REPLAY[5]="can0.*500.*  92 00 FA 01 D6"
+HUMAN_INFO[5]="Vorlauftemperatur IWS.EVE ?"
+VZ_UUIDFOR[5]="91da3450-116d-11e3-bff8-41df61cd1cac"
+MP_VALUEIS[5]=""
+
+typeset -i MAXP=5
+typeset -i P=1
+typeset -i T=1
+typeset -i R=1
+ALL_VALUES_READ="false"
+
+
+########################################
+#              M A I N
+########################################
+while [[ 1 != 0 ]]  # Endless loop
+do
+  TS_NOW="$( date +%s )"
+  while read LINE # Read line by line from "candump"
+  do
+    while [[ ${P} -le ${MAXP} ]] # check if the current line is on of the wanted mesurement values
+    do
+      if [[ "${MP_VALUEIS[${P}]}" == "" ]]
+      then
+        # Update the mesurment value, only if its empty !
+        if [[ "$( echo -e "${LINE}" | grep "${CAN_REPLAY[${P}]}" | wc -l )" -gt 0 ]]
+        then
+          # if the candump line includes one of the wanted values, get the value from message
+          VAL="$( echo -e "ibase=16;obase=A;$( echo -e "${LINE}" | sed -e "s/${CAN_REPLAY[${P}]} //" | cut -c1-5 | sed -e 's/ //' )" | bc )"
+          VALUE="$( echo "scale=2 ; ${VAL} / 10" | bc )"
+          echo -e ">> ${LINE} : ${VALUE} : ${HUMAN_INFO[${P}]}"
+          if [[ "${1}" != "-n" ]]
+          then
+            # Send the value to volkszaehler instance, if the program option is not "-n"
+            RESPONSE="$( wget -qO- "${server_url}/middleware.php/data/${VZ_UUIDFOR[${P}]}.json?operation=add&ts=${TS_NOW}000&value=${VALUE}" )"
+          fi
+          MP_VALUEIS[${P}]="${VALUE}"
+          while [[ ${T} -le ${MAXP} ]]
+          do
+            if [[ "${MP_VALUEIS[${T}]}" == "" ]]
+            then
+              break # if not all wanted values are read in, go ahead and read the next line from candump
+            fi
+            if [[ ${T} -eq ${MAXP} ]]
+            then
+              # If all values are read in, prepare to leave measurement cycle
+              ALL_VALUES_READ="true"
+              break
+            fi
+            T=${T}+1
+          done
+          T=1
+        fi
+      fi
+
+      if [[ "${ALL_VALUES_READ}" == "true" ]]
+      then
+        break # leave the measurement cycle (check for wanted measurement value)
+      fi
+      P=${P}+1
+    done
+    if [[ "${ALL_VALUES_READ}" == "true" ]]
+    then
+      break # leave the measurement cycle (candump line)
+    fi
+    P=1
+  done < <( ${CANDUMPER} )
+
+  # Reset the content of the mesurement values to "", this is need for the next cycle
+  while [[ ${R} -le ${MAXP} ]]
+  do
+    MP_VALUEIS[${R}]=""
+    R=${R}+1
+  done
+
+  # Reset the content of some variables for the next cycle
+  R=1
+  ALL_VALUES_READ="false"
+
+  # Do nothing for a while :-)
+  echo -e "\n1 Minute warten, und dann wieder von vorn\n"
+  sleep 60 # Sleep 1 minute
+done
