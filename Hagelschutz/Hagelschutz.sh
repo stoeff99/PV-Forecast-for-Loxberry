@@ -12,9 +12,15 @@ echo $curstate
 
 if [ "$curstate2" != "$curstate" ];then
 echo -n "value=$curstate" >/dev/udp/192.168.20.2/7008
-echo "The Hailstorm Value has Changed."
-else
-echo "The Hailstorm Value has not Changed."
+fi
+
+if [ "$curstate" = '"currentState":0' ] && [ "$curstate2" != '"currentState":0' ];then
+echo -n "There is no Hail storm warning" >/dev/udp/192.168.20.2/7008
+echo "There is no Hail storm warning"
+fi
+if [ "$curstate" != '"currentState":0' ];then
+echo -n "Warning, there is a Hail storm warning" >/dev/udp/192.168.20.2/7008
+echo "Warning, there is a Hail storm warning"
 fi
 
 sleep 120
